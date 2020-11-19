@@ -2,6 +2,8 @@ import './App.css';
 import React from 'react';
 import axios from 'axios';
 
+const API_PATH = 'http://localhost/online-magazine/index.php';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -17,10 +19,21 @@ class App extends React.Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   };
 
-  handleFormSubmit( event ) {
-    event.preventDefault();
-    console.log(this.state);
-  }
+  handleFormSubmit = e => {
+    e.preventDefault();
+    axios({
+      method: 'post',
+      url: `${API_PATH}`,
+      headers: { 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+      data: this.state
+    })
+      .then(result => {
+        this.setState({
+          mailSent: result.data.sent
+        })
+      })
+      .catch(error => this.setState({ error: error.message }));
+  };
 
   render() {
     return(
@@ -53,6 +66,11 @@ class App extends React.Component {
               value={this.state.message}
             ></textarea>
             <input type="submit" onClick={e => this.handleFormSubmit(e)} value="Submit" />
+            <div>
+              {this.state.mailSent &&
+                <div>Thank you for contcting us.</div>
+              }
+            </div>
           </form >
         </div>
       </div>
