@@ -24,7 +24,6 @@ class App extends React.Component {
     axios({
       method: 'post',
       url: `${API_PATH}`,
-      headers: { 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*' },
       data: this.state
     })
       .then(result => {
