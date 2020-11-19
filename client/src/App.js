@@ -1,58 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import './App.css';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fname: '',
+      lname: '',
+      email: '',
+      message: '',
+      mailSent: false,
+      error: null
+    };
+
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  };
+
+  handleFormSubmit( event ) {
+    event.preventDefault();
+    console.log(this.state);
+  }
+
+  render() {
+    return(
+      <div className="App">
+        <p>Contact Me</p>
+        <div>
+          <form action="#" >
+            <label>First Name</label>
+            <input type="text" id="fname" name="firstname" placeholder="Your name.."
+              value={this.state.fname}
+              onChange={e => this.setState({ fname: e.target.value })}
+            />
+            <label>Last Name</label>
+            <input type="text" id="lname" name="lastname" placeholder="Your last name.."
+              value={this.state.lname}
+              onChange={e => this.setState({ lname: e.target.value })}
+            />
+
+
+            <label>Email</label>
+            <input type="email" id="email" name="email" placeholder="Your email"
+              value={this.state.email}
+              onChange={e => this.setState({ email: e.target.value })}
+            />
+
+
+            <label>Message</label>
+            <textarea id="message" name="message" placeholder="Write something.."
+              onChange={e => this.setState({ message: e.target.value })}
+              value={this.state.message}
+            ></textarea>
+            <input type="submit" onClick={e => this.handleFormSubmit(e)} value="Submit" />
+          </form >
+        </div>
+      </div>
+    );
+  }  
 }
 
 export default App;
