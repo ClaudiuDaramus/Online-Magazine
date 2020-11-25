@@ -5,12 +5,13 @@ CREATE TABLE `user_type` (
 
 CREATE TABLE `user` (
     id INT(6) AUTO_INCREMENT PRIMARY KEY,
-    user_type_id INT(6) NOT NULL,
-    firstname VARCHAR(30) NOT NULL,
-    lastname VARCHAR(30) NOT NULL,
+    user_type_id INT(6) NOT NULL DEFAULT 1,
+    name VARCHAR(30) NOT NULL,
+    password VARCHAR(100) NOT NULL,
     email VARCHAR(50) NOT NULL,
     subscription BOOL DEFAULT 0,
     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY `email` (`email`),
     INDEX user_type_ind (user_type_id),
     FOREIGN KEY (user_type_id)
         REFERENCES user_type(id)

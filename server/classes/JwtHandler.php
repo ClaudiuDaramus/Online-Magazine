@@ -1,12 +1,12 @@
 <?php
-require './src/JWT.php';
-require './src/ExpiredException.php';
-require './src/SignatureInvalidException.php';
-require './src/BeforeValidException.php';
+require __DIR__.'/../jwt/JWT.php';
+require __DIR__.'/../jwt/ExpiredException.php';
+require __DIR__.'/../jwt/SignatureInvalidException.php';
+require __DIR__.'/../jwt/BeforeValidException.php';
 
 use \Firebase\JWT\JWT;
 
-class JWTHandler {
+class JwtHandler {
     protected $jwt_secrect;
     protected $token;
     protected $issuedAt;
@@ -45,30 +45,40 @@ class JWTHandler {
         return $this->jwt;
 
     }
+
+    protected function _errMsg($msg){
+        return [
+            "auth" => 0,
+            "message" => $msg
+        ];
+    }
     
     //DECODING THE TOKEN
     public function _jwt_decode_data($jwt_token){
         try{
             $decode = JWT::decode($jwt_token, $this->jwt_secrect, array('HS256'));
-            return $decode->data;
+            return [
+                "auth" => 1,
+                "data" => $decode->data
+            ];
         }
         catch(\Firebase\JWT\ExpiredException $e){
-            return $e->getMessage();
+            return $this->_errMsg($e->getMessage());
         }
         catch(\Firebase\JWT\SignatureInvalidException $e){
-            return $e->getMessage();
+            return $this->_errMsg($e->getMessage());
         }
         catch(\Firebase\JWT\BeforeValidException $e){
-            return $e->getMessage();
+            return $this->_errMsg($e->getMessage());
         }
         catch(\DomainException $e){
-            return $e->getMessage();
+            return $this->_errMsg($e->getMessage());
         }
         catch(\InvalidArgumentException $e){
-            return $e->getMessage();
+            return $this->_errMsg($e->getMessage());
         }
         catch(\UnexpectedValueException $e){
-            return $e->getMessage();
+            return $this->_errMsg($e->getMessage());
         }
 
     }

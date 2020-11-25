@@ -7,7 +7,7 @@ header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json; charset=UTF-8");
 
 // INCLUDING DATABASE AND MAKING OBJECT
-require 'database.php';
+require __DIR__.'/../classes/Database.php';
 $db_connection = new Database();
 $conn = $db_connection->dbConnection();
 
