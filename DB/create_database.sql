@@ -60,3 +60,7 @@ CREATE TABLE `comment` (
         REFERENCES user(id)
         ON DELETE CASCADE
 );
+
+INSERT INTO `user_type` (`name`) VALUES ('admin'), ('writer'), ('user');
+
+INSERT INTO `category` (`name`) VALUES ('Reviews'), ('News'), ('Featured'), ('Videos'), ('Movie'), ('TV Show'), ('Awards'), ('Interviews'), ('Festivals & Events'), ('Filmmaking'), ('Short Film');
