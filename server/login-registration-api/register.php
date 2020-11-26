@@ -44,15 +44,17 @@ else:
     $name = trim($data->name);
     $email = trim($data->email);
     $password = trim($data->password);
+    $resName = array("options"=>array("regexp"=>"/^([a-z\d\-_\s]){3,20}+$/"));
+    $resPassword = array("options"=>array("regexp"=>"/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$/"));
 
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)):
         $returnData = msg(0,422,'Invalid Email Address!');
     
-    elseif(strlen($password) < 8):
-        $returnData = msg(0,422,'Your password must be at least 8 characters long!');
+    elseif(!filter_var($name, FILTER_VALIDATE_REGEXP,$resName)):
+        $returnData = msg(0,422,'Your name must be between 3 and 20 characters long, with letters, numbers or "-", "_" symbols!');
 
-    elseif(strlen($name) < 3):
-        $returnData = msg(0,422,'Your name must be at least 3 characters long!');
+    elseif(!filter_var($password, FILTER_VALIDATE_REGEXP,$resPassword)):
+        $returnData = msg(0,422,'Your password must be between 8 and 10 characters long, with lowercase and uppercase letters, numbers and symbols!');
 
     else:
         try{
