@@ -1,9 +1,52 @@
 import React, {useContext, useState} from 'react'
 import {MyContext} from '../contexts/MyContext'
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 
-function Login(){
+function Copyright() {
+    return (
+        <Typography variant="body2" color="textSecondary" align="center">
+            {'Copyright © '}
+                Online Magazine
+                {' '}
+            {new Date().getFullYear()}
+            {'.'}
+      </Typography>
+    );
+}
 
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+}));
+
+export default function Login(){
     const {toggleNav,loginUser,isLoggedIn} = useContext(MyContext);
+    const classes = useStyles();
 
     const initialState = {
         userInfo:{
@@ -60,28 +103,65 @@ function Login(){
 
 
     return(
-        <div className="_loginRegister">
-            <h1>Login</h1>
-            <form  onSubmit={submitForm} noValidate>
-                <div className="form-control">
-                    <label>Email</label>
-                    <input name="email" type="email" required placeholder="Enter your email" value={state.userInfo.email} onChange={onChangeValue} />
-                </div>
-                <div className="form-control">
-                    <label>PassWord</label>
-                    <input name="password" type="password" required placeholder="Enter your password" value={state.userInfo.password} onChange={onChangeValue} />
-                </div>
-                {errorMsg}
-                {successMsg}
-                <div className="form-control">
-                    <button type="submit">Login</button>
-                </div>
-            </form>
-            <div className="_navBtn">
-                <button onClick={toggleNav}>Register</button>
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Login
+                </Typography>
+                <form className={classes.form} onSubmit={submitForm} noValidate>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        autoFocus
+                        value={state.userInfo.email}
+                        onChange={onChangeValue}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                        value={state.userInfo.password}
+                        onChange={onChangeValue}
+                    />
+                    {errorMsg}
+                    {successMsg}
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                    >
+                    Login
+                    </Button>
+                    <Grid container>
+                        <Grid item>
+                            <Link href="#" variant="body2" onClick={toggleNav}>
+                                {"Don't have an account? Register"}
+                            </Link>
+                        </Grid>
+                    </Grid>
+                </form>
             </div>
-        </div>
+            <Box mt={8}>
+                <Copyright />
+            </Box>
+        </Container>
     );
-}
-
-export default Login;
+};

@@ -46,7 +46,6 @@ if($stmt->rowCount() > 0){
             'title' => $row['title'],
             'body' => html_entity_decode($row['body']),
             'writer_id' => $row['writer_id'],
-            'popularity' => $row['popularity'],
             'create_date' => $row['create_date']
         ];
         // PUSH ARTICLE DATA IN OUR $articles_array ARRAY

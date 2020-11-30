@@ -1,5 +1,6 @@
 import React, {useContext} from 'react'
 import {MyContext} from '../contexts/MyContext'
+import Blog from './Blog'
 
 // Importing the Login & Register Componet
 import Login from './Login'
@@ -7,20 +8,15 @@ import Register from './Register'
 
 function Home(){
 
-    const {rootState,logoutUser} = useContext(MyContext);
-    const {isAuth,theUser,showLogin} = rootState;
+    const {rootState} = useContext(MyContext);
+    const {isAuth, showLogin} = rootState;
 
+
+    console.log(isAuth)
     // If user Logged in
-    if(isAuth)
-    {
-        return(
-            <div className="userInfo">
-                <div className="_img"><span role="img" aria-label="User Image">👦</span></div>
-                <h1>{theUser.name}</h1>
-                <div className="_email"><span>{theUser.email}</span></div>
-                <button onClick={logoutUser}>Logout</button>
-            </div>
-        )
+    if(isAuth){
+        return <Blog />;
+   
     }
     // Showing Login Or Register Page According to the condition
     else if(showLogin){

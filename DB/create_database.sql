@@ -23,7 +23,6 @@ CREATE TABLE `article` (
     writer_id INT(6) NOT NULL,
     title VARCHAR(30) NOT NULL,
     body VARCHAR(200) NOT NULL,
-    popularity INT(6) NOT NULL DEFAULT 1,
     create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     INDEX writer_ind (writer_id),
     FOREIGN KEY (writer_id)
