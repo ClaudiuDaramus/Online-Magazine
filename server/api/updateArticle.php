@@ -30,7 +30,7 @@ if(isset($data->id)){
     //CHECK WHETHER THERE IS ANY ARTICLE IN OUR DATABASE
     if($get_stmt->rowCount() > 0){
         
-        // FETCH ARTICLE FROM DATBASE 
+        // FETCH ARTICLE FROM DATABASE
         $row = $get_stmt->fetch(PDO::FETCH_ASSOC);
         
         // CHECK, IF NEW UPDATE REQUEST DATA IS AVAILABLE THEN SET IT OTHERWISE SET OLD DATA
@@ -53,12 +53,12 @@ if(isset($data->id)){
         if($update_stmt->execute()){
             $msg['message'] = 'Data updated successfully';
         }else{
-            $msg['message'] = 'data not updated';
+            $msg['message'] = 'Data not updated';
         }   
         
     }
     else{
-        $msg['message'] = 'Invlid ID';
+        $msg['message'] = 'Invalid ID';
     }  
     
     echo  json_encode($msg);

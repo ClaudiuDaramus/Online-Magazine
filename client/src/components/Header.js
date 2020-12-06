@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -29,13 +29,16 @@ const useStyles = makeStyles((theme) => ({
 export default function Header(props) {
   const classes = useStyles();
   const { sections, title } = props;
-  const {rootState,logoutUser} = useContext(MyContext);
+  const {rootState,logoutUser, updateSubscription} = useContext(MyContext);
   const {theUser} = rootState;
+
+  useEffect(() => {
+  }, [theUser]);
 
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
-        <Button size="small">Subscribe</Button>
+        <Button size="small" onClick={updateSubscription}>{theUser.subscription === "0" ? "Subscribe" : "Unsubscribe"}</Button>
         <Typography
           component="h2"
           variant="h5"

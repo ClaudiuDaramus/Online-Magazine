@@ -61,6 +61,15 @@ class MyContextProvider extends Component{
 
         return article.data;
     }
+
+    updateSubscription = async () => {
+        const user = await Axios.put('api/updateSubscription.php',{
+            id: this.state.theUser.id
+        });
+        this.getLoggedUser();
+
+        return user.data;
+    }
     
     // Toggle between Login & Signup page
     toggleNav = () => {
@@ -104,6 +113,20 @@ class MyContextProvider extends Component{
         return login.data;
     }
 
+    getLoggedUser = async  () => {
+        // Fetching the user information
+        const {data} = await Axios.get('login-registration-api/user-info.php');
+
+        // If user information is successfully received
+        if(data.success && data.user){
+            this.setState({
+                ...this.state,
+                isAuth:true,
+                theUser:data.user
+            });
+        }
+    }
+
     // Checking user logged in or not
     isLoggedIn = async () => {
         const loginToken = localStorage.getItem('loginToken');
@@ -114,18 +137,7 @@ class MyContextProvider extends Component{
             //Adding JWT token to axios default header
             Axios.defaults.headers.common['Authorization'] = 'bearer '+loginToken;
 
-            // Fetching the user information
-            const {data} = await Axios.get('login-registration-api/user-info.php');
-
-            // If user information is successfully received
-            if(data.success && data.user){
-                this.setState({
-                    ...this.state,
-                    isAuth:true,
-                    theUser:data.user
-                });
-            }
-
+            this.getLoggedUser();
         }
     }
 
@@ -141,7 +153,8 @@ class MyContextProvider extends Component{
             getArticle: this.getArticle,
             insertArticle:this.insertArticle,
             updateArticle:this.updateArticle,
-            deleteArticle:this.deleteArticle
+            deleteArticle:this.deleteArticle,
+            updateSubscription:this.updateSubscription
         }
         return(
             <MyContext.Provider value={contextValue}>

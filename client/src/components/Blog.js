@@ -32,7 +32,7 @@ const sections = [
 const sidebar = {
   title: 'About',
   description:
-    "A small creation for people who like movies with React, Context API, Material UI client, PHP server and MySQL Database.",
+    "A small creation for people who like movies, made with React, Context API, Material UI client, PHP server and MySQL Database.",
 };
 
 export default function Blog() {
