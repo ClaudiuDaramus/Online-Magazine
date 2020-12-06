@@ -35,10 +35,10 @@ export default function FeaturedPost(props) {
                 {post.title}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                {post.date}
+                {post.create_date}
               </Typography>
               <Typography variant="subtitle1" paragraph>
-                {post.description}
+                {post.body}
               </Typography>
               <Typography variant="subtitle1" color="primary">
                 Continue reading...
@@ -46,7 +46,7 @@ export default function FeaturedPost(props) {
             </CardContent>
           </div>
           <Hidden xsDown>
-            <CardMedia className={classes.cardMedia} image={post.image} title={post.imageTitle} />
+            <CardMedia className={classes.cardMedia} image={'https://source.unsplash.com/random'} title={post.imageTitle} />
           </Hidden>
         </Card>
       </CardActionArea>

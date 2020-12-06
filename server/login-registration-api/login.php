@@ -81,7 +81,7 @@ else:
 
                 // IF INVALID PASSWORD
                 else:
-                    $returnData = msg(0,422,'Invalid Password!');
+                   $returnData = msg(0,422,'Invalid Password!');
                 endif;
 
             // IF THE USER IS NOT FOUNDED BY EMAIL THEN SHOW THE FOLLOWING ERROR

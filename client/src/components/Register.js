@@ -55,6 +55,7 @@ export default function Register(){
             name:'',
             email:'',
             password:'',
+            subscription:false
         },
         errorMsg:'',
         successMsg:'',
@@ -81,12 +82,16 @@ export default function Register(){
     }
 
     // On change the Input Value (name, email, password)
-    const onChangeValue = (e) => {
+    const onChangeValue = (event) => {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
         setState({
             ...state,
             userInfo:{
                 ...state.userInfo,
-                [e.target.name]:e.target.value
+                [name]:value
             }
         });
     }
@@ -156,7 +161,11 @@ export default function Register(){
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
-                                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                                control={<Checkbox
+                                    name="subscription"
+                                    value={state.userInfo.subscription}
+                                    onChange={onChangeValue}
+                                    color="primary" />}
                                 label="I want to receive inspiration, marketing promotions and updates via email."
                             />
                         </Grid>

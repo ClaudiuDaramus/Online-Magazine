@@ -40,9 +40,9 @@ export default function MainFeaturedPost(props) {
   const { post } = props;
 
   return (
-    <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${post.image})` }}>
+    <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url("https://source.unsplash.com/random")` }}>
       {/* Increase the priority of the hero background image */}
-      {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
+      {<img style={{ display: 'none' }} src={"https://source.unsplash.com/random"} alt={"main"} />}
       <div className={classes.overlay} />
       <Grid container>
         <Grid item md={6}>
@@ -51,10 +51,10 @@ export default function MainFeaturedPost(props) {
               {post.title}
             </Typography>
             <Typography variant="h5" color="inherit" paragraph>
-              {post.description}
+              {post.body}
             </Typography>
             <Link variant="subtitle1" href="#">
-              {post.linkText}
+              "Continue reading…"
             </Link>
           </div>
         </Grid>

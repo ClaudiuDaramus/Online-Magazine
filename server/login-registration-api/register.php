@@ -44,21 +44,21 @@ else:
     $name = trim($data->name);
     $email = trim($data->email);
     $password = trim($data->password);
-    $resName = array("options"=>array("regexp"=>"/^([a-z\d\-_\s]){3,20}+$/"));
+    $subscription = trim($data->subscription);
+    $resName = array("options"=>array("regexp"=>"/^([a-zA-Z\d\-_ \s]){3,20}+$/"));
     $resPassword = array("options"=>array("regexp"=>"/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$/"));
 
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)):
         $returnData = msg(0,422,'Invalid Email Address!');
     
     elseif(!filter_var($name, FILTER_VALIDATE_REGEXP,$resName)):
-        $returnData = msg(0,422,'Your name must be between 3 and 20 characters long, with letters, numbers or "-", "_" symbols!');
+        $returnData = msg(0,422,'Your name must be between 3 and 20 characters long, with letters, numbers, "-", "_" symbols or spaces!');
 
     elseif(!filter_var($password, FILTER_VALIDATE_REGEXP,$resPassword)):
         $returnData = msg(0,422,'Your password must be between 8 and 10 characters long, with lowercase and uppercase letters, numbers and symbols!');
 
     else:
         try{
-
             $check_email = "SELECT `email` FROM `user` WHERE `email`=:email";
             $check_email_stmt = $conn->prepare($check_email);
             $check_email_stmt->bindValue(':email', $email,PDO::PARAM_STR);
@@ -68,7 +68,7 @@ else:
                 $returnData = msg(0,422, 'This E-mail already in use!');
             
             else:
-                $insert_query = "INSERT INTO `user`(`name`,`email`,`password`) VALUES(:name,:email,:password)";
+                $insert_query = "INSERT INTO `user`(`name`,`email`,`password`,`subscription`) VALUES(:name,:email,:password,:subscription)";
 
                 $insert_stmt = $conn->prepare($insert_query);
 
@@ -76,10 +76,11 @@ else:
                 $insert_stmt->bindValue(':name', htmlspecialchars(strip_tags($name)),PDO::PARAM_STR);
                 $insert_stmt->bindValue(':email', $email,PDO::PARAM_STR);
                 $insert_stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT),PDO::PARAM_STR);
+                $insert_stmt->bindValue(':subscription', $subscription,PDO::PARAM_STR);
 
                 $insert_stmt->execute();
 
-                $returnData = msg(1,201,'You have successfully registered.');
+                $returnData = msg(1,201,'You have successfully registered.',$insert_stmt);
 
             endif;
 

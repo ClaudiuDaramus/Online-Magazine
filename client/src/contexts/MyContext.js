@@ -17,7 +17,49 @@ class MyContextProvider extends Component{
     state = {
         showLogin:true,
         isAuth:false,
-        theUser:null,
+        theUser:null
+    }
+
+    getArticles = async () => {
+        const articles = await Axios.get('api/readArticle.php',{});
+
+        return articles.data;
+    }
+
+    getArticle = async (id) => {
+        const article = await Axios.get('api/readArticle.php',{
+            id: id
+        });
+
+        return article.data;
+    }
+
+    insertArticle = async (title, body) => {
+        const article = await Axios.post('api/insertArticle.php',{
+            title: title,
+            body: body,
+            writer_id:this.state.theUser.id
+        });
+
+        return article.data;
+    }
+
+    updateArticle = async (title, body) => {
+        const article = await Axios.put('api/updateArticle.php',{
+            title: title,
+            body: body,
+            writer_id:this.state.theUser.id
+        });
+
+        return article.data;
+    }
+
+    deleteArticle = async (id) => {
+        const article = await Axios.delete('api/deleteArticle.php',{
+            id: id
+        });
+
+        return article.data;
     }
     
     // Toggle between Login & Signup page
@@ -44,7 +86,8 @@ class MyContextProvider extends Component{
         const register = await Axios.post('login-registration-api/register.php',{
             name:user.name,
             email:user.email,
-            password:user.password 
+            password:user.password,
+            subscription:user.subscription === true ? 1 : 0
         });
 
         return register.data;
@@ -93,7 +136,12 @@ class MyContextProvider extends Component{
             isLoggedIn:this.isLoggedIn,
             registerUser:this.registerUser,
             loginUser:this.loginUser,
-            logoutUser:this.logoutUser
+            logoutUser:this.logoutUser,
+            getArticles:this.getArticles,
+            getArticle: this.getArticle,
+            insertArticle:this.insertArticle,
+            updateArticle:this.updateArticle,
+            deleteArticle:this.deleteArticle
         }
         return(
             <MyContext.Provider value={contextValue}>

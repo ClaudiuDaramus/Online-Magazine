@@ -13,4 +13,6 @@ website/yarn.lock
 website/node_modules
 website/i18n/*
 .vscode/*
+.idea/*
 server/vendor/*
+client/.idea

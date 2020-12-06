@@ -11,8 +11,6 @@ function Home(){
     const {rootState} = useContext(MyContext);
     const {isAuth, showLogin} = rootState;
 
-
-    console.log(isAuth)
     // If user Logged in
     if(isAuth){
         return <Blog />;
