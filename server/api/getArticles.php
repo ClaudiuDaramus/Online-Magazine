@@ -10,14 +10,17 @@ require __DIR__.'/../classes/Database.php';
 $db_connection = new Database();
 $conn = $db_connection->dbConnection();
 
-function substrwords($text, $maxchar, $end='...') {
-    if (strlen($text) > $maxchar || $text == '') {
+// GET DATA FORM REQUEST
+$data = json_decode(file_get_contents("php://input"));
+
+function substrwords($text, $maxChar, $end='...') {
+    if (strlen($text) > $maxChar || $text == '') {
         $words = preg_split('/\s/', $text);
         $output = '';
         $i      = 0;
         while (1) {
             $length = strlen($output)+strlen($words[$i]);
-            if ($length > $maxchar) {
+            if ($length > $maxChar) {
                 break;
             }
             else {
@@ -33,25 +36,25 @@ function substrwords($text, $maxchar, $end='...') {
     return $output;
 }
 
-
 // CHECK GET ID PARAMETER OR NOT
-if(isset($_GET['id']))
-{
-    //IF HAS ID PARAMETER
-    $article_id = filter_var($_GET['id'], FILTER_VALIDATE_INT,[
-        'options' => [
-            'default' => 'all_articles',
-            'min_range' => 1
-        ]
-    ]);
-}
-else{
-    $article_id = 'all_articles';
-}
+$article_type = isset($data->category) ? $data->category : 'all_articles';
+$sql = null;
 
-// MAKE SQL QUERY
-// IF GET ARTICLES ID, THEN SHOW ARTICLES BY ID OTHERWISE SHOW ALL ARTICLES
-$sql = is_numeric($article_id) ? "SELECT * FROM `article` WHERE id='$article_id'" : "SELECT * FROM `article` ORDER BY create_date DESC";
+if($article_type !== 'all_articles') {
+    // MAKE SQL QUERY
+    $sql = "SELECT *
+            FROM `article` a
+            INNER JOIN `article_category` ac on a.id = ac.article_id
+            WHERE ac.category_id='$article_type'
+            ORDER BY a.create_date DESC";
+} else {
+    // MAKE SQL QUERY
+    // IF GET CATEGORY, THEN SHOW ARTICLES CATEGORY, OTHERWISE SHOW ALL ARTICLES
+    $sql = "SELECT *
+            FROM `article`
+            ORDER BY create_date DESC";
+
+}
 
 $stmt = $conn->prepare($sql);
 

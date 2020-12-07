@@ -1,4 +1,3 @@
-DROP TABLE `comment`;
 DROP TABLE `article_genre`;
 DROP TABLE `genre`;
 DROP TABLE `article_category`;

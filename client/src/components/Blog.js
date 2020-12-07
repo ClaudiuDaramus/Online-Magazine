@@ -17,16 +17,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const sections = [
-  { title: 'Home', url: '#' },
-  { title: 'Behind The Lines Of Code', url: '#' },
-  { title: 'Reviews', url: '#' },
-  { title: 'Trailers', url: '#' },
-  { title: 'Movies', url: '#' },
-  { title: 'TV Shows', url: '#' },
-  { title: 'Interviews', url: '#' },
-  { title: 'Festivals & Events', url: '#' },
-  { title: 'Filmmaking', url: '#' },
-  { title: 'Short Films', url: '#' },
+  { title: 'Home', url: '/' },
+  { title: 'Behind The Lines Of Code', url: '/behind-the-lines-of-code' },
+  { title: 'Reviews', url: '/reviews' },
+  { title: 'Trailers', url: '/trailers' },
+  { title: 'Movies', url: '/movies' },
+  { title: 'TV Shows', url: '/tv-shows' },
+  { title: 'Interviews', url: '/interviews' },
+  { title: 'Festivals & Events', url: '/festivals-&-events' },
+  { title: 'Filmmaking', url: '/filmmaking' },
+  { title: 'Short Films', url: '/short-films' },
 ];
 
 const sidebar = {
@@ -41,11 +41,11 @@ export default function Blog() {
   const {getArticles} = useContext(MyContext);
   const [articles,setArticles] = useState([]);
 
-  useEffect(() => {
-    getArticles().then(data => {
-      setArticles(data);
+  useEffect( () => {
+      getArticles().then(data => {
+        setArticles(data);
     });
-  }, []);
+  }, [getArticles]);
 
   return (
     <React.Fragment>
@@ -53,11 +53,7 @@ export default function Blog() {
       <Container maxWidth="lg">
         <Header title="Movie Radar" sections={sections} />
         <main>
-          {articles.map((post, index) => (
-              index === 0 ?
-            <MainFeaturedPost key={index} post={post} />
-            : ''
-          ))}
+          <MainFeaturedPost key={"main"} post={articles.length !== 0 ? articles[0] : {title:"", body:""}} />
           <Grid container spacing={4}>
             {articles.map((post, index) => (
                 index !== 0 ?

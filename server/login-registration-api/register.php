@@ -10,7 +10,7 @@ function msg($success,$status,$message,$extra = []){
         'success' => $success,
         'status' => $status,
         'message' => $message
-    ],$extra);
+    ],['fields' => $extra]);
 }
 
 // INCLUDING DATABASE AND MAKING OBJECT
@@ -35,7 +35,7 @@ elseif(!isset($data->name)
     || empty(trim($data->password))
     ):
 
-    $fields = ['fields' => ['name','email','password']];
+    $fields = ['name','email','password'];
     $returnData = msg(0,422,'Please Fill in all Required Fields!',$fields);
 
 // IF THERE ARE NO EMPTY FIELDS THEN-

@@ -68,17 +68,6 @@ CREATE TABLE `article_genre` (
     primary key (article_id, genre_id)
 );
 
-CREATE TABLE `comment` (
-    id INT(6) AUTO_INCREMENT PRIMARY KEY,
-    text VARCHAR(200) NOT NULL,
-    user_id INT(6) NOT NULL,
-    comment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX user_ind (user_id),
-    FOREIGN KEY (user_id)
-        REFERENCES user(id)
-        ON DELETE CASCADE
-);
-
 INSERT INTO `user_type` (name) VALUES ('admin'), ('writer'), ('user');
 
 INSERT INTO `category` (name) VALUES ('Reviews'), ('News'), ('Trailers'), ('Movies'), ('TV Shows'), ('Awards'), ('Interviews'), ('Festivals & Events'), ('Filmmaking'), ('Short Films');

@@ -49,9 +49,9 @@ export default function Header(props) {
         >
           {title}
         </Typography>
-        <IconButton>
-          <SearchIcon />
-        </IconButton>
+        {/*<IconButton>*/}
+        {/*  <SearchIcon />*/}
+        {/*</IconButton>*/}
         <span style={{marginRight:"10px"}}>
           {theUser.name}
         </span>

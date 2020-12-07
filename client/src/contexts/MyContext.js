@@ -21,13 +21,21 @@ class MyContextProvider extends Component{
     }
 
     getArticles = async () => {
-        const articles = await Axios.get('api/readArticle.php',{});
+        const articles = await Axios.get('api/getArticles.php',{});
+
+        return articles.data;
+    }
+
+    getArticlesByCategory = async (categoryId) => {
+        const articles = await Axios.get('api/getArticles.php',{
+            id: categoryId
+        });
 
         return articles.data;
     }
 
     getArticle = async (id) => {
-        const article = await Axios.get('api/readArticle.php',{
+        const article = await Axios.get('api/getArticle.php',{
             id: id
         });
 
@@ -154,7 +162,8 @@ class MyContextProvider extends Component{
             insertArticle:this.insertArticle,
             updateArticle:this.updateArticle,
             deleteArticle:this.deleteArticle,
-            updateSubscription:this.updateSubscription
+            updateSubscription:this.updateSubscription,
+            getArticlesByCategory:this.getArticlesByCategory
         }
         return(
             <MyContext.Provider value={contextValue}>

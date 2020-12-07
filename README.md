@@ -1,4 +1,6 @@
 # Online-Magazine
+A small creation for people who like movies, made with React, Context API, Material UI client, PHP server and MySQL Database.
+
 Main pages:
 - website idea showcase page;
 - list all articles;
