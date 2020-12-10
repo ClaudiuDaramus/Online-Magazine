@@ -1,10 +1,7 @@
 import React, {useContext, useEffect} from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import {MyContext} from '../contexts/MyContext'
@@ -26,9 +23,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header(props) {
+const sections = [
+  { title: 'Home', url: '/' },
+  { title: 'Behind The Lines Of Code', url: '/behind-the-lines-of-code' },
+  { title: 'Reviews', url: '/reviews' },
+  { title: 'Trailers', url: '/trailers' },
+  { title: 'Movies', url: '/movies' },
+  { title: 'TV Shows', url: '/tv-shows' },
+  { title: 'Interviews', url: '/interviews' },
+  { title: 'Festivals & Events', url: '/festivals-&-events' },
+  { title: 'Filmmaking', url: '/filmmaking' },
+  { title: 'Short Films', url: '/short-films' },
+];
+
+const title = "Movie Radar";
+
+export default function Header() {
   const classes = useStyles();
-  const { sections, title } = props;
   const {rootState,logoutUser, updateSubscription} = useContext(MyContext);
   const {theUser} = rootState;
 
@@ -49,9 +60,6 @@ export default function Header(props) {
         >
           {title}
         </Typography>
-        {/*<IconButton>*/}
-        {/*  <SearchIcon />*/}
-        {/*</IconButton>*/}
         <span style={{marginRight:"10px"}}>
           {theUser.name}
         </span>
@@ -76,8 +84,3 @@ export default function Header(props) {
     </React.Fragment>
   );
 }
-
-Header.propTypes = {
-  sections: PropTypes.array,
-  title: PropTypes.string,
-};

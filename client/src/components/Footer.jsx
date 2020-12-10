@@ -3,18 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-
-function Copyright() {
-  return (
-      <Typography variant="body2" color="textSecondary" align="center">
-          {'Copyright © '}
-              Online Magazine
-              {' '}
-          {new Date().getFullYear()}
-          {'.'}
-    </Typography>
-  );
-}
+import Copyright from "./Copyright";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -24,9 +13,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Footer(props) {
+export default function Footer() {
   const classes = useStyles();
-  const { description, title } = props;
+  const title = "Movie Radar";
+  const description="By Claudiu Daramus";
 
   return (
     <footer className={classes.footer}>

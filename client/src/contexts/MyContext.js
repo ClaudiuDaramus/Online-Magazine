@@ -1,32 +1,32 @@
-import React, { createContext,Component } from "react";
+import React, {createContext, useCallback, useEffect, useState} from "react";
 import axios from 'axios'
-export const MyContext = createContext();
+
+const initialState = {
+    isAuth: false,
+    theUser: {}
+};
+
+export const MyContext = createContext(initialState);
 
 // Define the base URL
 const Axios = axios.create({
-    baseURL: 'http://localhost/online-magazine/',
+    baseURL: 'http://localhost:8090/online-magazine/',
 });
 
-class MyContextProvider extends Component{
-    constructor(){
-        super();
-        this.isLoggedIn();
-    }
+function MyContextProvider(props) {
+    const [isAuth,setIsAuth] = useState(false);
+    const [theUser,setTheUser] = useState({});
+    const [loading,setLoading] = useState(true);
 
-    // Root State
-    state = {
-        showLogin:true,
-        isAuth:false,
-        theUser:null
-    }
 
-    getArticles = async () => {
+
+    const getArticles = async () => {
         const articles = await Axios.get('api/getArticles.php',{});
 
         return articles.data;
     }
 
-    getArticlesByCategory = async (categoryId) => {
+    const getArticlesByCategory = async (categoryId) => {
         const articles = await Axios.get('api/getArticles.php',{
             id: categoryId
         });
@@ -34,7 +34,7 @@ class MyContextProvider extends Component{
         return articles.data;
     }
 
-    getArticle = async (id) => {
+    const getArticle = async (id) => {
         const article = await Axios.get('api/getArticle.php',{
             id: id
         });
@@ -42,27 +42,27 @@ class MyContextProvider extends Component{
         return article.data;
     }
 
-    insertArticle = async (title, body) => {
+    const insertArticle = async (title, body) => {
         const article = await Axios.post('api/insertArticle.php',{
             title: title,
             body: body,
-            writer_id:this.state.theUser.id
+            writer_id:theUser.id
         });
 
         return article.data;
     }
 
-    updateArticle = async (title, body) => {
+    const updateArticle = async (title, body) => {
         const article = await Axios.put('api/updateArticle.php',{
             title: title,
             body: body,
-            writer_id:this.state.theUser.id
+            writer_id:theUser.id
         });
 
         return article.data;
     }
 
-    deleteArticle = async (id) => {
+    const deleteArticle = async (id) => {
         const article = await Axios.delete('api/deleteArticle.php',{
             id: id
         });
@@ -70,34 +70,22 @@ class MyContextProvider extends Component{
         return article.data;
     }
 
-    updateSubscription = async () => {
+    const updateSubscription = async () => {
         const user = await Axios.put('api/updateSubscription.php',{
-            id: this.state.theUser.id
+            id: theUser.id
         });
-        this.getLoggedUser();
+        await getLoggedUser();
 
         return user.data;
     }
-    
-    // Toggle between Login & Signup page
-    toggleNav = () => {
-        const showLogin = !this.state.showLogin;
-        this.setState({
-            ...this.state,
-            showLogin
-        })
-    }
 
     // On Click the Log out button
-    logoutUser = () => {
+    const logoutUser = () => {
         localStorage.removeItem('loginToken');
-        this.setState({
-            ...this.state,
-            isAuth:false
-        })
+        setIsAuth(false);
     }
 
-    registerUser = async (user) => {
+    const registerUser = async (user) => {
 
         // Sending the user registration request
         const register = await Axios.post('login-registration-api/register.php',{
@@ -111,7 +99,7 @@ class MyContextProvider extends Component{
     }
 
 
-    loginUser = async (user) => {
+    const loginUser = async (user) => {
 
         // Sending the user Login request
         const login = await Axios.post('login-registration-api/login.php',{
@@ -121,57 +109,56 @@ class MyContextProvider extends Component{
         return login.data;
     }
 
-    getLoggedUser = async  () => {
+    const getLoggedUser = async () => {
         // Fetching the user information
         const {data} = await Axios.get('login-registration-api/user-info.php');
-
         // If user information is successfully received
         if(data.success && data.user){
-            this.setState({
-                ...this.state,
-                isAuth:true,
-                theUser:data.user
-            });
+            setIsAuth(true);
+            setTheUser(data.user);
+            setLoading(false);
         }
     }
 
     // Checking user logged in or not
-    isLoggedIn = async () => {
+    const isLoggedIn = useCallback(() => {
         const loginToken = localStorage.getItem('loginToken');
 
         // If inside the local-storage has the JWT token
         if(loginToken){
-
             //Adding JWT token to axios default header
             Axios.defaults.headers.common['Authorization'] = 'bearer '+loginToken;
 
-            this.getLoggedUser();
+            getLoggedUser();
+        } else {
+            setLoading(false);
         }
+    }, []);
+
+    useEffect(() => {
+        isLoggedIn();
+    }, [isLoggedIn]);
+
+    const contextValue = {
+        rootState: {isAuth, theUser, loading},
+        isLoggedIn,
+        registerUser,
+        loginUser,
+        logoutUser,
+        getArticles,
+        getArticle,
+        insertArticle,
+        updateArticle,
+        deleteArticle,
+        updateSubscription,
+        getArticlesByCategory
     }
 
-    render(){
-        const contextValue = {
-            rootState:this.state,
-            toggleNav:this.toggleNav,
-            isLoggedIn:this.isLoggedIn,
-            registerUser:this.registerUser,
-            loginUser:this.loginUser,
-            logoutUser:this.logoutUser,
-            getArticles:this.getArticles,
-            getArticle: this.getArticle,
-            insertArticle:this.insertArticle,
-            updateArticle:this.updateArticle,
-            deleteArticle:this.deleteArticle,
-            updateSubscription:this.updateSubscription,
-            getArticlesByCategory:this.getArticlesByCategory
-        }
-        return(
-            <MyContext.Provider value={contextValue}>
-                {this.props.children}
-            </MyContext.Provider>
-        )
-    }
-
+    return(
+        <MyContext.Provider value={contextValue}>
+            {props.children}
+        </MyContext.Provider>
+    );
 }
 
 export default MyContextProvider;

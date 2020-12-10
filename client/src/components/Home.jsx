@@ -16,26 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const sections = [
-  { title: 'Home', url: '/' },
-  { title: 'Behind The Lines Of Code', url: '/behind-the-lines-of-code' },
-  { title: 'Reviews', url: '/reviews' },
-  { title: 'Trailers', url: '/trailers' },
-  { title: 'Movies', url: '/movies' },
-  { title: 'TV Shows', url: '/tv-shows' },
-  { title: 'Interviews', url: '/interviews' },
-  { title: 'Festivals & Events', url: '/festivals-&-events' },
-  { title: 'Filmmaking', url: '/filmmaking' },
-  { title: 'Short Films', url: '/short-films' },
-];
-
-const sidebar = {
-  title: 'About',
-  description:
-    "A small creation for people who like movies, made with React, Context API, Material UI client, PHP server and MySQL Database.",
-};
-
-export default function Blog() {
+export default function Home() {
   const classes = useStyles();
 
   const {getArticles} = useContext(MyContext);
@@ -51,7 +32,7 @@ export default function Blog() {
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Movie Radar" sections={sections} />
+        <Header />
         <main>
           <MainFeaturedPost key={"main"} post={articles.length !== 0 ? articles[0] : {title:"", body:""}} />
           <Grid container spacing={4}>
@@ -62,15 +43,12 @@ export default function Blog() {
             ))}
           </Grid>
           <Grid container spacing={5} className={classes.mainGrid}>
-            {/*<Main title="From the firehose" posts={articles} />*/}
-            <Sidebar
-              title={sidebar.title}
-              description={sidebar.description}
-            />
+            {/*<Article title="From the firehose" posts={articles} />*/}
+            <Sidebar />
           </Grid>
         </main>
       </Container>
-      <Footer title="Movie Radar" description="By Claudiu Daramus" />
+      <Footer />
     </React.Fragment>
   );
 }

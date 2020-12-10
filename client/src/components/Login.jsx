@@ -11,18 +11,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-                Online Magazine
-                {' '}
-            {new Date().getFullYear()}
-            {'.'}
-      </Typography>
-    );
-}
+import Copyright from "./Copyright";
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -45,8 +35,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login(){
-    const {toggleNav,loginUser,isLoggedIn} = useContext(MyContext);
+    const {loginUser,isLoggedIn} = useContext(MyContext);
     const classes = useStyles();
+    const history = useHistory();
 
     const initialState = {
         userInfo:{
@@ -80,6 +71,7 @@ export default function Login(){
             });
             localStorage.setItem('loginToken', data.token);
             await isLoggedIn();
+            history.push("/");
         }
         else{
             setState({
@@ -152,7 +144,7 @@ export default function Login(){
                     </Button>
                     <Grid container>
                         <Grid item>
-                            <Link href="#" variant="body2" onClick={toggleNav}>
+                            <Link href="/register" variant="body2">
                                 {"Don't have an account? Register"}
                             </Link>
                         </Grid>

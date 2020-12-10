@@ -13,19 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-                Online Magazine
-                {' '}
-            {new Date().getFullYear()}
-            {'.'}
-      </Typography>
-    );
-}
+import Copyright from "./Copyright";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -49,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Register(){
     const classes = useStyles();
-    const {toggleNav,registerUser} = useContext(MyContext);
+    const {registerUser} = useContext(MyContext);
     const initialState = {
         userInfo:{
             name:'',
@@ -183,7 +171,7 @@ export default function Register(){
                     </Button>
                     <Grid container>
                         <Grid item>
-                            <Link href="#" variant="body2" onClick={toggleNav}>
+                            <Link href="/login" variant="body2">
                                 Already have an account? Login
                             </Link>
                         </Grid>

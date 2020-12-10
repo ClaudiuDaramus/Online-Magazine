@@ -15,9 +15,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Sidebar(props) {
+export default function Sidebar() {
   const classes = useStyles();
-  const { description, title } = props;
+  const title= 'About';
+  const description = "A small creation for people who like movies, made with React, Context API, Material UI client, PHP server and MySQL Database.";
 
   return (
     <Grid item xs={12} md={4}>
@@ -27,7 +28,6 @@ export default function Sidebar(props) {
         </Typography>
         <Typography>{description}</Typography>
       </Paper>
-
     </Grid>
   );
 }
