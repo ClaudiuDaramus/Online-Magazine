@@ -27,9 +27,7 @@ function MyContextProvider(props) {
     }
 
     const getArticlesByCategory = async (categoryId) => {
-        const articles = await Axios.get('api/getArticles.php',{
-            id: categoryId
-        });
+        const articles = await Axios.get('api/getArticles.php',{ params: { id: categoryId } });
 
         return articles.data;
     }
@@ -116,6 +114,8 @@ function MyContextProvider(props) {
         if(data.success && data.user){
             setIsAuth(true);
             setTheUser(data.user);
+            setLoading(false);
+        } else {
             setLoading(false);
         }
     }

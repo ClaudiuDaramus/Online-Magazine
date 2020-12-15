@@ -10,9 +10,6 @@ require __DIR__.'/../classes/Database.php';
 $db_connection = new Database();
 $conn = $db_connection->dbConnection();
 
-// GET DATA FORM REQUEST
-$data = json_decode(file_get_contents("php://input"));
-
 function substrwords($text, $maxChar, $end='...') {
     if (strlen($text) > $maxChar || $text == '') {
         $words = preg_split('/\s/', $text);
@@ -37,7 +34,7 @@ function substrwords($text, $maxChar, $end='...') {
 }
 
 // CHECK GET ID PARAMETER OR NOT
-$article_type = isset($data->category) ? $data->category : 'all_articles';
+$article_type = isset($_GET['id']) ? $_GET['id'] : 'all_articles';
 $sql = null;
 
 if($article_type !== 'all_articles') {

@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    backgroundImage: 'url(https://source.unsplash.com/random)',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -38,11 +37,10 @@ const useStyles = makeStyles((theme) => ({
 export default function MainFeaturedPost(props) {
   const classes = useStyles();
   const { post } = props;
+  const image = post !== undefined && post.id !== undefined ? require("../images/" + post.id + ".jpg") : '';
 
   return (
-    <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url("https://source.unsplash.com/random")` }}>
-      {/* Increase the priority of the hero background image */}
-      {<img style={{ display: 'none' }} src={"https://source.unsplash.com/random"} alt={"main"} />}
+    <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${image.default}`}}>
       <div className={classes.overlay} />
       <Grid container>
         <Grid item md={6}>

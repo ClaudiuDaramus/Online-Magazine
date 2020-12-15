@@ -19,28 +19,28 @@ export default function App() {
                     loading === true ? <LoadingSpinner /> :
                         <Switch>
                             <Route path="/reviews" exact>
-                                {isAuth ? <ArticleByCategory /> : <Redirect to="/login" />}
+                                {isAuth ? <ArticleByCategory categoryId={1} /> : <Redirect to="/login" />}
                             </Route>
                             <Route path="/trailers" exact>
-                                {isAuth ? <ArticleByCategory /> : <Redirect to="/login" />}
+                                {isAuth ? <ArticleByCategory categoryId={2} /> : <Redirect to="/login" />}
                             </Route>
                             <Route path="/movies" exact>
-                                {isAuth ? <ArticleByCategory /> : <Redirect to="/login" />}
+                                {isAuth ? <ArticleByCategory categoryId={3} /> : <Redirect to="/login" />}
                             </Route>
                             <Route path="/tv-shows" exact>
-                                {isAuth ? <ArticleByCategory /> : <Redirect to="/login" />}
+                                {isAuth ? <ArticleByCategory categoryId={4} /> : <Redirect to="/login" />}
                             </Route>
                             <Route path="/interviews" exact>
-                                {isAuth ? <ArticleByCategory /> : <Redirect to="/login" />}
+                                {isAuth ? <ArticleByCategory categoryId={5} /> : <Redirect to="/login" />}
                             </Route>
                             <Route path="/festivals-&-events" exact>
-                                {isAuth ? <ArticleByCategory /> : <Redirect to="/login" />}
+                                {isAuth ? <ArticleByCategory categoryId={6} /> : <Redirect to="/login" />}
                             </Route>
                             <Route path="/filmmaking" exact>
-                                {isAuth ? <ArticleByCategory /> : <Redirect to="/login" />}
+                                {isAuth ? <ArticleByCategory categoryId={7} /> : <Redirect to="/login" />}
                             </Route>
                             <Route path="/short-films" exact>
-                                {isAuth ? <ArticleByCategory /> : <Redirect to="/login" />}
+                                {isAuth ? <ArticleByCategory categoryId={8} /> : <Redirect to="/login" />}
                             </Route>
                             <Route path="/behind-the-lines-of-code" exact>
                                 {isAuth ? <BehindTheLinesOfCode /> : <Redirect to="/login" />}

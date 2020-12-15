@@ -8,6 +8,7 @@ import Footer from './Footer';
 import {MyContext} from "../contexts/MyContext";
 import Sidebar from "./Sidebar";
 import {makeStyles} from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
     mainGrid: {
@@ -15,16 +16,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ArticleByCategory() {
+export default function ArticleByCategory(props) {
+    const {categoryId} = props;
     const classes = useStyles();
-    const {getArticles} = useContext(MyContext);
+    const {getArticlesByCategory} = useContext(MyContext);
     const [articles,setArticles] = useState([]);
 
     useEffect( () => {
-        getArticles().then(data => {
+        getArticlesByCategory(categoryId).then(data => {
             setArticles(data);
         });
-    }, [getArticles]);
+    }, [getArticlesByCategory, categoryId]);
 
     return (
         <React.Fragment>
@@ -32,11 +34,14 @@ export default function ArticleByCategory() {
             <Container maxWidth="lg">
                 <Header />
                 <main>
-                    <Grid container spacing={4}>
-                        {articles.map((post, index) => (
-                            <FeaturedPost key={index} post={post} />
-                        ))}
-                    </Grid>
+                    {articles.length > 0 ?
+                        <Grid container spacing={4}>
+                            {articles.map((post, index) => (
+                                <FeaturedPost key={index} post={post} />
+                            ))}
+                        </Grid>
+                        : <Typography align="center">"No articles found!"</Typography >
+                    }
                     <Grid container spacing={5} className={classes.mainGrid}>
                         <Sidebar />
                     </Grid>

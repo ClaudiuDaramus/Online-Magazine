@@ -70,7 +70,12 @@ CREATE TABLE `article_genre` (
 
 INSERT INTO `user_type` (name) VALUES ('admin'), ('writer'), ('user');
 
-INSERT INTO `category` (name) VALUES ('Reviews'), ('News'), ('Trailers'), ('Movies'), ('TV Shows'), ('Awards'), ('Interviews'), ('Festivals & Events'), ('Filmmaking'), ('Short Films');
+INSERT INTO `user` (`user_type_id`,`name`,`password`,`email`,`subscription`)
+VALUES (2,'test','$2y$10$O7HyhYSDS.Jy.myB.AO3sul1UDexMs/1Ru6p5xH/dCCTYQU1YUQp2','test@test.com',0), # testPass12!
+       (1,'admin','$2y$10$IWEDA68iHEQHWFgXggzGSO.Dzmpq1tP7ys1lqvbHWlunRpdVI0esS','admin@admin.com',0), # adminPass47!
+       (3,'John Doe','$2y$10$xvENOHfcp92xqtyeikHVs.7jjW5.q4b5eP7x5oeUub53uZWW4QQEa','tmail0832@gmail.com',1); #johnyPass97?
+
+INSERT INTO `category` (name) VALUES ('Reviews'), ('Trailers'), ('Movies'), ('TV Shows'), ('Interviews'), ('Festivals & Events'), ('Filmmaking'), ('Short Films');
 
 INSERT INTO `genre` (name) VALUES ('Action'), ('Comedy'), ('Drama'), ('Fantasy'), ('Horror'), ('Mystery'), ('Romance'), ('Thriller'), ('Western'), ('Anime'), ('Historical'), ('Science fiction'), ('Animation');
 

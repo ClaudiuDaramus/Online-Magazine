@@ -4,7 +4,7 @@ class Database{
     private $db_host = 'localhost';
     private $db_name = 'online_magazine';
     private $db_username = 'lampUser';
-    private $db_password = 'myPassword';
+    private $db_password = 'myPassword2132!%';
     
     
     public function dbConnection(){

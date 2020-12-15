@@ -24,6 +24,7 @@ const useStyles = makeStyles({
 export default function FeaturedPost(props) {
   const classes = useStyles();
   const { post } = props;
+  const image = post !== undefined && post.id !== undefined ? require("../images/" + post.id + ".jpg") : '';
 
   return (
     <Grid item xs={12} md={6}>
@@ -46,7 +47,7 @@ export default function FeaturedPost(props) {
             </CardContent>
           </div>
           <Hidden xsDown>
-            <CardMedia className={classes.cardMedia} image={'https://source.unsplash.com/random'} title={post.imageTitle} />
+            <CardMedia className={classes.cardMedia} image={image.default} title={post.imageTitle} />
           </Hidden>
         </Card>
       </CardActionArea>
