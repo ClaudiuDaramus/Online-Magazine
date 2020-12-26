@@ -51,7 +51,7 @@ export default function MainFeaturedPost(props) {
             <Typography variant="h5" color="inherit" paragraph>
               {post.body}
             </Typography>
-            <Link variant="subtitle1" href="#">
+            <Link variant="subtitle1" href={"/article/" + post.id}>
               "Continue reading…"
             </Link>
           </div>

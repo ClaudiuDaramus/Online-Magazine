@@ -33,9 +33,7 @@ function MyContextProvider(props) {
     }
 
     const getArticle = async (id) => {
-        const article = await Axios.get('api/getArticle.php',{
-            id: id
-        });
+        const article = await Axios.get('api/getArticle.php',{ params: { id: id } });
 
         return article.data;
     }
