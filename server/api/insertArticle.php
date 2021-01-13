@@ -20,23 +20,28 @@ $msg['message'] = '';
 // CHECK IF RECEIVED DATA FROM THE REQUEST
 if(isset($data->title) && isset($data->body) && isset($data->writer_id)){
     // CHECK DATA VALUE IS EMPTY OR NOT
-    if(!empty($data->title) && !empty($data->body) && !empty($data->writer_id)){
+    if(!empty($data->title) && !empty($data->body) && !empty($data->writer_id) && !empty($data->user_type_id)){
+
+        if($data->user_type_id == "1" || $data->user_type_id == "2") {
+            $insert_query = "INSERT INTO `article`(title,body,writer_id) VALUES(:title,:body,:writer_id)";
+
+            $insert_stmt = $conn->prepare($insert_query);
+            // DATA BINDING
+            $insert_stmt->bindValue(':title', htmlspecialchars(strip_tags($data->title)),PDO::PARAM_STR);
+            $insert_stmt->bindValue(':body', htmlspecialchars(strip_tags($data->body)),PDO::PARAM_STR);
+            $insert_stmt->bindValue(':writer_id', htmlspecialchars(strip_tags($data->writer_id)),PDO::PARAM_STR);
+
+            if($insert_stmt->execute()){
+                $msg['message'] = 'Data Inserted Successfully';
+            }else{
+                $msg['message'] = 'Data not Inserted';
+            }
+        } else{
+            $msg['message'] = "Oops! The user can't add articles!";
+        }
+
         
-        $insert_query = "INSERT INTO `article`(title,body,writer_id) VALUES(:title,:body,:writer_id)";
-        
-        $insert_stmt = $conn->prepare($insert_query);
-        // DATA BINDING
-        $insert_stmt->bindValue(':title', htmlspecialchars(strip_tags($data->title)),PDO::PARAM_STR);
-        $insert_stmt->bindValue(':body', htmlspecialchars(strip_tags($data->body)),PDO::PARAM_STR);
-        $insert_stmt->bindValue(':writer_id', htmlspecialchars(strip_tags($data->writer_id)),PDO::PARAM_STR);
-        
-        if($insert_stmt->execute()){
-            $msg['message'] = 'Data Inserted Successfully';
-        }else{
-            $msg['message'] = 'Data not Inserted';
-        } 
-        
-    }else{
+    } else{
         $msg['message'] = 'Oops! empty field detected. Please fill all the fields';
     }
 }

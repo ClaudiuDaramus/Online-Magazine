@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 export default function FeaturedPost(props) {
   const classes = useStyles();
   const { post } = props;
-  const image = post !== undefined && post.id !== undefined ? require("../images/" + post.id + ".jpg") : "";
+  const image = post !== undefined && post.id !== undefined && parseInt(post.id) <= 5 ? require("../images/" + post.id + ".jpg") : "";
 
   return (
     <Grid item xs={12} md={6}>

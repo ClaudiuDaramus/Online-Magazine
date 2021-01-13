@@ -24,7 +24,7 @@ export default function Article() {
     const classes = useStyles();
     const {getArticle} = useContext(MyContext);
     const [post,setPost] = useState({title:"", user:{name:""}, body:"", create_date:""});
-    const image = post !== undefined && post.id !== undefined ? require("../images/" + post.id + ".jpg") : "";
+    const image = post !== undefined && post.id !== undefined && parseInt(post.id) <= 5 ? require("../images/" + post.id + ".jpg") : "";
 
     useEffect( () => {
         const id = parseInt(location.pathname.split("/article/")[1]);

@@ -42,7 +42,8 @@ function MyContextProvider(props) {
         const article = await Axios.post('api/insertArticle.php',{
             title: title,
             body: body,
-            writer_id:theUser.id
+            writer_id:theUser.id,
+            user_type_id:theUser.user_type_id
         });
 
         return article.data;

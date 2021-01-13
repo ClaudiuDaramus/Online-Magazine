@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import LoadingSpinner from "./components/LoadingSpinner";
 import Article from "./components/Article";
+import AddArticle from "./components/AddArticle";
 
 export default function App() {
         const {rootState} = useContext(MyContext);
@@ -19,6 +20,9 @@ export default function App() {
                 {
                     loading === true ? <LoadingSpinner /> :
                         <Switch>
+                            <Route path="/add" exact>
+                                {isAuth ? <AddArticle /> : <Redirect to="/login" />}
+                            </Route>
                             <Route path="/article/:id" exact>
                                 {isAuth ? <Article /> : <Redirect to="/login" />}
                             </Route>

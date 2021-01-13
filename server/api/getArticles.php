@@ -43,13 +43,13 @@ if($article_type !== 'all_articles') {
             FROM `article` a
             INNER JOIN `article_category` ac on a.id = ac.article_id
             WHERE ac.category_id='$article_type'
-            ORDER BY a.create_date DESC";
+            ORDER BY a.create_date ASC";
 } else {
     // MAKE SQL QUERY
     // IF GET CATEGORY, THEN SHOW ARTICLES CATEGORY, OTHERWISE SHOW ALL ARTICLES
     $sql = "SELECT *
             FROM `article`
-            ORDER BY create_date DESC";
+            ORDER BY create_date ASC";
 
 }
 
