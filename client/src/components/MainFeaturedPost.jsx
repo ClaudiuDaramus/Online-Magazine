@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MainFeaturedPost(props) {
   const classes = useStyles();
   const { post } = props;
-  const image = post !== undefined && post.id !== undefined ? require("../images/" + post.id + ".jpg") : '';
+  const image = post !== undefined && post.id !== undefined ? require("../images/" + post.id + ".jpg") : "";
 
   return (
     <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${image.default}`}}>

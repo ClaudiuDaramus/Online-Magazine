@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Header from './Header';
 import Footer from './Footer';
-import Sidebar from "./Sidebar";
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
@@ -14,14 +13,20 @@ const useStyles = makeStyles((theme) => ({
     mainGrid: {
         marginTop: theme.spacing(3),
     },
+    typography: {
+        whiteSpace: "pre-wrap"
+    }
 }));
 
 export default function BehindTheLinesOfCode() {
     const classes = useStyles();
     const title = "Movie Radar";
-    const description = "A small creation for people who like movies, made with React, Context API, Material UI client, PHP server and MySQL Database.";
+    const description = "Movie Radar is a website where you can find the latest news and review about films on any scale, medium and length. \n" +
+        "The client is made with React, Context API and Material UI. \n" +
+        "The server is made with PHP language, PHP PDO and login/registration implemented with JWT. \n" +
+        "The Database is made with MySQL. \n" +
+        "Next you can see the Entity Relationship Diagram of the database.";
     const image = require("../images/online_magazine_ER.png");
-    console.log(image)
 
     return (
         <React.Fragment>
@@ -29,19 +34,16 @@ export default function BehindTheLinesOfCode() {
             <Container maxWidth="lg">
                 <Header />
                 <Grid item xs={12} md={8}>
-                    <Paper variant="outlined">
-                        <img src={image.default} alt={"DB"} />
-                    </Paper>
                     <Typography component="h1" variant="h3" gutterBottom>
                         {title}
                     </Typography>
                     <Divider />
-                    <Typography paragraph={true}>
+                    <Typography paragraph={true} className={classes.typography}>
                         {description}
                     </Typography>
-                </Grid>
-                <Grid container spacing={5} className={classes.mainGrid}>
-                    <Sidebar />
+                    <Paper variant="outlined">
+                        <img src={image.default} alt={"DB"} />
+                    </Paper>
                 </Grid>
             </Container>
             <Footer />

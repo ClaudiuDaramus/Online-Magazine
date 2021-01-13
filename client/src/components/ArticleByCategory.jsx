@@ -6,7 +6,7 @@ import Header from './Header';
 import FeaturedPost from './FeaturedPost';
 import Footer from './Footer';
 import {MyContext} from "../contexts/MyContext";
-import Sidebar from "./Sidebar";
+import About from "./About";
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
@@ -43,7 +43,7 @@ export default function ArticleByCategory(props) {
                         : <Typography align="center">"No articles found!"</Typography >
                     }
                     <Grid container spacing={5} className={classes.mainGrid}>
-                        <Sidebar />
+                        <About />
                     </Grid>
                 </main>
             </Container>

@@ -6,23 +6,20 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
-  sidebarAboutBox: {
+  aboutBox: {
     padding: theme.spacing(2),
     backgroundColor: theme.palette.grey[200],
-  },
-  sidebarSection: {
-    marginTop: theme.spacing(3),
-  },
+  }
 }));
 
-export default function Sidebar() {
+export default function About() {
   const classes = useStyles();
   const title= 'About';
   const description = "A small creation for people who like movies, made with React, Context API, Material UI client, PHP server and MySQL Database.";
 
   return (
     <Grid item xs={12} md={4}>
-      <Paper elevation={0} className={classes.sidebarAboutBox}>
+      <Paper elevation={0} className={classes.aboutBox}>
         <Typography variant="h6" gutterBottom>
           {title}
         </Typography>
@@ -32,7 +29,7 @@ export default function Sidebar() {
   );
 }
 
-Sidebar.propTypes = {
+About.propTypes = {
   description: PropTypes.string,
   title: PropTypes.string,
 };

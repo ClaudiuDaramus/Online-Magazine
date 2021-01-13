@@ -23,8 +23,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Error() {
     const classes = useStyles();
 
-    console.log("error here")
-
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />

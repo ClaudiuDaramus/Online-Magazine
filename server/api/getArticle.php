@@ -24,11 +24,18 @@ if(isset($_GET['id'])) {
     //CHECK WHETHER THERE IS ANY ARTICLE IN OUR DATABASE
     if($stmt->rowCount() > 0){
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $userId = $row['writer_id'];
+        $sqlUser = "SELECT id, name FROM `user` WHERE id='$userId'";
+        $stmtUser = $conn->prepare($sqlUser);
+        $stmtUser->execute();
+        $user = $stmtUser->fetch(PDO::FETCH_ASSOC);
+
         $article_data = [
             'id' => $row['id'],
             'title' => $row['title'],
             'body' => html_entity_decode($row['body']),
-            'writer_id' => $row['writer_id'],
+            'user' => $user,
             'create_date' => $row['create_date']
         ];
 

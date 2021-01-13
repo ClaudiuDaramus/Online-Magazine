@@ -50,6 +50,11 @@ export default function Header() {
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
         <Button size="small" onClick={updateSubscription}>{theUser.subscription === "0" ? "Subscribe" : "Unsubscribe"}</Button>
+        {theUser.user_type_id === "1" || theUser.user_type_id === "2" ?
+            <Button size="small" href="/add">
+              Add New Article
+            </Button>
+            : ''}
         <Typography
           component="h2"
           variant="h5"

@@ -6,7 +6,7 @@ import Container from '@material-ui/core/Container';
 import Header from './Header';
 import MainFeaturedPost from './MainFeaturedPost';
 import FeaturedPost from './FeaturedPost';
-import Sidebar from './Sidebar';
+import About from './About';
 import Footer from './Footer';
 import {MyContext} from "../contexts/MyContext";
 
@@ -44,7 +44,7 @@ export default function Home() {
           </Grid>
           <Grid container spacing={5} className={classes.mainGrid}>
             {/*<Article title="From the firehose" posts={articles} />*/}
-            <Sidebar />
+            <About />
           </Grid>
         </main>
       </Container>
