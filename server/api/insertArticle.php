@@ -16,13 +16,21 @@ $data = json_decode(file_get_contents("php://input"));
 
 //CREATE MESSAGE ARRAY AND SET EMPTY
 $msg['message'] = '';
+$resTitle = array("options"=>array("regexp"=>"/^([a-zA-Z\d\-_ \s\:\'\’\,\‘]){1,99}+$/"));
+$resBody = array("options"=>array("regexp"=>"/^([a-zA-Z\d\-_ \s\:\'\’\,\‘\.\“\”\(\)\/\–]){1,999}+$/"));
 
 // CHECK IF RECEIVED DATA FROM THE REQUEST
 if(isset($data->title) && isset($data->body) && isset($data->writer_id)){
     // CHECK DATA VALUE IS EMPTY OR NOT
     if(!empty($data->title) && !empty($data->body) && !empty($data->writer_id) && !empty($data->user_type_id)){
 
-        if($data->user_type_id == "1" || $data->user_type_id == "2") {
+        if(!filter_var($data->title, FILTER_VALIDATE_REGEXP,$resTitle)) {
+            $msg['message'] = 'Your Title must be between 1 and 99 characters long, with letters, numbers, "-_:\'’,‘" symbols or spaces!';
+        }
+        else if(!filter_var($data->body, FILTER_VALIDATE_REGEXP,$resBody)) {
+            $msg['message'] = 'Your Body must be between 1 and 999 characters long, with letters, numbers, "-_:\'’,‘.“”()/–" symbols or spaces!';
+        }
+        else if($data->user_type_id == "1" || $data->user_type_id == "2") {
             $insert_query = "INSERT INTO `article`(title,body,writer_id) VALUES(:title,:body,:writer_id)";
 
             $insert_stmt = $conn->prepare($insert_query);
@@ -40,7 +48,7 @@ if(isset($data->title) && isset($data->body) && isset($data->writer_id)){
             $msg['message'] = "Oops! The user can't add articles!";
         }
 
-        
+
     } else{
         $msg['message'] = 'Oops! empty field detected. Please fill all the fields';
     }
