@@ -8,6 +8,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
+import LoadingSpinner from './LoadingSpinner';
 
 const useStyles = makeStyles({
   card: {
@@ -47,7 +48,11 @@ export default function FeaturedPost(props) {
             </CardContent>
           </div>
           <Hidden xsDown>
-            <CardMedia className={classes.cardMedia} image={image.default} title={post.imageTitle} />
+            {
+              image.default ?
+              <CardMedia className={classes.cardMedia} image={image.default} title={post.imageTitle} />
+              : <LoadingSpinner />
+            }
           </Hidden>
         </Card>
       </CardActionArea>

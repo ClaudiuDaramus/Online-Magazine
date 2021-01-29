@@ -87,58 +87,56 @@ export default function AddArticle() {
                     </Typography>
                     <Divider />
                     <form onSubmit={submitForm} noValidate>
-                        <Typography paragraph={true}>
-                            <Grid item xs={12}>
-                                <TextField
-                                    autoComplete="ftitle"
-                                    name="title"
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="title"
-                                    label="Title"
-                                    autoFocus
-                                    value={state.post.title}
-                                    onChange={onChangeValue}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="body"
-                                    label="Body"
-                                    name="body"
-                                    autoComplete="email"
-                                    value={state.post.body}
-                                    onChange={onChangeValue}
-                                />
-                            </Grid>
-
-                            <InputLabel htmlFor="import-button" style={styles.importLabel}>
-                                <Input
-                                    accept="image/*"
-                                    id="import-button"
-                                    onChange={onChangeValue}
-                                    style={styles.hidden}
-                                    name="image"
-                                    type="file"
-                                />
-                                Import Photo with ".jpg" extension
-                            </InputLabel>
-                            {state.errorMsg}
-                            {state.successMsg}
-                            <Button
-                                type="submit"
+                        <Grid item xs={12}>
+                            <TextField
+                                autoComplete="ftitle"
+                                name="title"
+                                variant="outlined"
+                                required
                                 fullWidth
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
-                            >
-                                Add Article
-                            </Button>
-                        </Typography>
+                                id="title"
+                                label="Title"
+                                autoFocus
+                                value={state.post.title}
+                                onChange={onChangeValue}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="body"
+                                label="Body"
+                                name="body"
+                                autoComplete="email"
+                                value={state.post.body}
+                                onChange={onChangeValue}
+                            />
+                        </Grid>
+
+                        <InputLabel htmlFor="import-button" style={styles.importLabel}>
+                            <Input
+                                accept="image/*"
+                                id="import-button"
+                                onChange={onChangeValue}
+                                style={styles.hidden}
+                                name="image"
+                                type="file"
+                            />
+                            Import Photo with ".jpg" extension
+                        </InputLabel>
+                        {state.errorMsg}
+                        {state.successMsg}
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Add Article
+                        </Button>
                     </form>
                 </Grid>
                 <Grid container spacing={5} className={classes.mainGrid}>
