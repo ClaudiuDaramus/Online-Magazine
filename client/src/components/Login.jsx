@@ -11,7 +11,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Copyright from "./Copyright";
 import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -151,9 +150,6 @@ export default function Login(){
                     </Grid>
                 </form>
             </div>
-            <Box mt={8}>
-                <Copyright />
-            </Box>
         </Container>
     );
 };

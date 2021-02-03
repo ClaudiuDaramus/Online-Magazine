@@ -4,14 +4,13 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "./Header";
-import About from "./About";
 import Container from "@material-ui/core/Container";
-import Footer from "./Footer";
 import {makeStyles} from "@material-ui/core/styles";
 import {MyContext} from "../contexts/MyContext";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {Input, InputLabel} from "@material-ui/core";
+
 
 const useStyles = makeStyles((theme) => ({
     mainGrid: {
@@ -139,11 +138,7 @@ export default function AddArticle() {
                         </Button>
                     </form>
                 </Grid>
-                <Grid container spacing={5} className={classes.mainGrid}>
-                    <About />
-                </Grid>
             </Container>
-            <Footer />
         </React.Fragment>
     );
 }

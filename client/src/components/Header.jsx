@@ -24,23 +24,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const sections = [
-  { title: 'Home', url: '/' },
-  { title: 'Behind The Lines Of Code', url: '/behind-the-lines-of-code' },
-  { title: 'Reviews', url: '/reviews' },
-  { title: 'Trailers', url: '/trailers' },
-  { title: 'Movies', url: '/movies' },
-  { title: 'TV Shows', url: '/tv-shows' },
-  { title: 'Interviews', url: '/interviews' },
-  { title: 'Festivals & Events', url: '/festivals-&-events' },
-  { title: 'Filmmaking', url: '/filmmaking' },
-  { title: 'Short Films', url: '/short-films' },
+  { title: 'Home', url: '/' }
 ];
 
 const title = "Movie Radar";
 
 export default function Header() {
   const classes = useStyles();
-  const {rootState,logoutUser, updateSubscription} = useContext(MyContext);
+  const {rootState,logoutUser} = useContext(MyContext);
   const {theUser} = rootState;
 
   useEffect(() => {
@@ -49,7 +40,6 @@ export default function Header() {
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
-        <Button size="small" onClick={updateSubscription}>{theUser.subscription === "0" ? "Subscribe" : "Unsubscribe"}</Button>
         {theUser.user_type_id === "1" || theUser.user_type_id === "2" ?
             <Button size="small" href="/add">
               Add New Article
