@@ -41,8 +41,7 @@ export default function Register(){
         userInfo:{
             name:'',
             email:'',
-            password:'',
-            subscription:false
+            password:''
         },
         errorMsg:'',
         successMsg:'',
@@ -144,16 +143,6 @@ export default function Register(){
                                 autoComplete="current-password"
                                 value={state.userInfo.password}
                                 onChange={onChangeValue}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <FormControlLabel
-                                control={<Checkbox
-                                    name="subscription"
-                                    value={state.userInfo.subscription}
-                                    onChange={onChangeValue}
-                                    color="primary" />}
-                                label="I want to receive inspiration, marketing promotions and updates via email."
                             />
                         </Grid>
                     </Grid>

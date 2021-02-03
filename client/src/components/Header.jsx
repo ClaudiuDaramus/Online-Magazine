@@ -27,7 +27,7 @@ const sections = [
   { title: 'Home', url: '/' }
 ];
 
-const title = "Movie Radar";
+const title = "Examen";
 
 export default function Header() {
   const classes = useStyles();
@@ -40,11 +40,11 @@ export default function Header() {
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
-        {theUser.user_type_id === "1" || theUser.user_type_id === "2" ?
+        {/* {theUser.user_type_id === "1" || theUser.user_type_id === "2" ?
             <Button size="small" href="/add">
               Add New Article
             </Button>
-            : ''}
+            : ''} */}
         <Typography
           component="h2"
           variant="h5"

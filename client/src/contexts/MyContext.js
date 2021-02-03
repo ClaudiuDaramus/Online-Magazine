@@ -67,15 +67,6 @@ function MyContextProvider(props) {
         return article.data;
     }
 
-    const updateSubscription = async () => {
-        const user = await Axios.put('api/updateSubscription.php',{
-            id: theUser.id
-        });
-        await getLoggedUser();
-
-        return user.data;
-    }
-
     // On Click the Log out button
     const logoutUser = () => {
         localStorage.removeItem('loginToken');
@@ -88,8 +79,7 @@ function MyContextProvider(props) {
         const register = await Axios.post('login-registration-api/register.php',{
             name:user.name,
             email:user.email,
-            password:user.password,
-            subscription:user.subscription === true ? 1 : 0
+            password:user.password
         });
 
         return register.data;
@@ -123,6 +113,7 @@ function MyContextProvider(props) {
     const isLoggedIn = useCallback(() => {
         const loginToken = localStorage.getItem('loginToken');
 
+        console.log(loginToken)
         // If inside the local-storage has the JWT token
         if(loginToken){
             //Adding JWT token to axios default header
@@ -149,7 +140,6 @@ function MyContextProvider(props) {
         insertArticle,
         updateArticle,
         deleteArticle,
-        updateSubscription,
         getArticlesByCategory
     }
 

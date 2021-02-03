@@ -4,7 +4,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Header from './Header';
-import FeaturedPost from './FeaturedPost';
 import {MyContext} from "../contexts/MyContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -14,16 +13,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Home() {
-  const classes = useStyles();
+  // const classes = useStyles();
 
-  const {getArticles} = useContext(MyContext);
-  const [articles,setArticles] = useState([]);
+  // const {getArticles} = useContext(MyContext);
+  // const [articles,setArticles] = useState([]);
 
-  useEffect( () => {
-      getArticles().then(data => {
-        setArticles(data);
-    });
-  }, [getArticles]);
+  // useEffect( () => {
+  //     getArticles().then(data => {
+  //       setArticles(data);
+  //   });
+  // }, [getArticles]);
 
   return (
     <React.Fragment>
@@ -32,9 +31,9 @@ export default function Home() {
         <Header />
         <main>
           <Grid container spacing={4}>
-            {articles.map((post, index) => (
+            {/* {articles.map((post, index) => (
               <FeaturedPost key={index} post={post} />
-            ))}
+            ))} */}
           </Grid>
         </main>
       </Container>

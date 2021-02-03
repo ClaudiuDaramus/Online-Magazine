@@ -44,7 +44,6 @@ else:
     $name = trim($data->name);
     $email = trim($data->email);
     $password = trim($data->password);
-    $subscription = trim($data->subscription);
     $resName = array("options"=>array("regexp"=>"/^([a-zA-Z\d\-_ \s]){3,20}+$/"));
     $resPassword = array("options"=>array("regexp"=>"/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$/"));
 
@@ -68,7 +67,7 @@ else:
                 $returnData = msg(0,422, 'This E-mail already in use!');
             
             else:
-                $insert_query = "INSERT INTO `user`(`name`,`email`,`password`,`subscription`) VALUES(:name,:email,:password,:subscription)";
+                $insert_query = "INSERT INTO `user`(`name`,`email`,`password`) VALUES(:name,:email,:password)";
 
                 $insert_stmt = $conn->prepare($insert_query);
 
@@ -76,7 +75,6 @@ else:
                 $insert_stmt->bindValue(':name', htmlspecialchars(strip_tags($name)),PDO::PARAM_STR);
                 $insert_stmt->bindValue(':email', $email,PDO::PARAM_STR);
                 $insert_stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT),PDO::PARAM_STR);
-                $insert_stmt->bindValue(':subscription', $subscription,PDO::PARAM_STR);
 
                 $insert_stmt->execute();
 

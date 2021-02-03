@@ -6,20 +6,18 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import Login from "./components/Login";
 import Register from "./components/Register";
 import LoadingSpinner from "./components/LoadingSpinner";
-import AddArticle from "./components/AddArticle";
 
 export default function App() {
         const {rootState} = useContext(MyContext);
         const {isAuth, loading} = rootState;
+
+        console.log(isAuth,loading)
 
         return (
             <React.Fragment>
                 {
                     loading === true ? <LoadingSpinner /> :
                         <Switch>
-                            <Route path="/add" exact>
-                                {isAuth ? <AddArticle /> : <Redirect to="/login" />}
-                            </Route>
                             <Route path="/login" exact>
                                 {isAuth ? <Redirect to="/" /> : <Login />}
                             </Route>
